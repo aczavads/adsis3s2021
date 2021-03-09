@@ -1,4 +1,4 @@
-package aula20210303.caixaComMedidas;
+package aula20210303.caixaComMedidasV2;
 
 
 public class AppCaixaComMedidas {
@@ -24,27 +24,22 @@ public class AppCaixaComMedidas {
 		caixinha.comprimentoEmMM = 300;
 		
 
-		//implementar o teste que impeça um livro que não caiba na caixa de ser a ela adicionado.
-		if (bigJava.alturaEmMM <= caixinha.alturaEmMM 
-				&& bigJava.larguraEmMM <= caixinha.larguraEmMM 
-				&& bigJava.comprimentoEmMM <= caixinha.comprimentoEmMM) {
-			caixinha.conteúdo = bigJava;
+		adicionarLivroNaCaixa(bigJava, caixinha);
+		System.out.println("O conteúdo da caixinha é: " + caixinha.conteúdo);
+	
+
+		adicionarLivroNaCaixa(miniBíblia, caixinha);
+		System.out.println("O conteúdo da caixinha é: " + caixinha.conteúdo);
+	}
+	
+	private static void adicionarLivroNaCaixa(Livro livroParaAdicionar, CaixaComMedidas caixaNaQualColocaremosOLivro) {
+		if (livroParaAdicionar.alturaEmMM <= caixaNaQualColocaremosOLivro.alturaEmMM 
+				&& livroParaAdicionar.larguraEmMM <= caixaNaQualColocaremosOLivro.larguraEmMM 
+				&& livroParaAdicionar.comprimentoEmMM <= caixaNaQualColocaremosOLivro.comprimentoEmMM) {
+			caixaNaQualColocaremosOLivro.conteúdo = livroParaAdicionar;
 		} else {
 			System.out.println("Opa, livro excedeu alguma dimensão da caixa!");
 		}				
-		System.out.println("O conteúdo da caixinha é: " + caixinha.conteúdo);
-		
-		if (miniBíblia.alturaEmMM <= caixinha.alturaEmMM 
-				&& miniBíblia.larguraEmMM <= caixinha.larguraEmMM 
-				&& miniBíblia.comprimentoEmMM <= caixinha.comprimentoEmMM) {
-			caixinha.conteúdo = bigJava;
-		} else {
-			System.out.println("Opa, livro excedeu alguma dimensão da caixa!");
-		}				
-		System.out.println("O conteúdo da caixinha é: " + caixinha.conteúdo);
-		
-		
-		
 	}
 
 }

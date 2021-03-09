@@ -1,4 +1,4 @@
-package aula20210303.caixaComMedidas;
+package aula20210303.caixaComMedidasV3;
 
 
 public class AppCaixaComMedidas {
@@ -24,27 +24,14 @@ public class AppCaixaComMedidas {
 		caixinha.comprimentoEmMM = 300;
 		
 
-		//implementar o teste que impeça um livro que não caiba na caixa de ser a ela adicionado.
-		if (bigJava.alturaEmMM <= caixinha.alturaEmMM 
-				&& bigJava.larguraEmMM <= caixinha.larguraEmMM 
-				&& bigJava.comprimentoEmMM <= caixinha.comprimentoEmMM) {
-			caixinha.conteúdo = bigJava;
-		} else {
-			System.out.println("Opa, livro excedeu alguma dimensão da caixa!");
-		}				
+		//adicionarLivroNaCaixa(bigJava, caixinha);
+		caixinha.adicionarLivro(bigJava);
 		System.out.println("O conteúdo da caixinha é: " + caixinha.conteúdo);
-		
-		if (miniBíblia.alturaEmMM <= caixinha.alturaEmMM 
-				&& miniBíblia.larguraEmMM <= caixinha.larguraEmMM 
-				&& miniBíblia.comprimentoEmMM <= caixinha.comprimentoEmMM) {
-			caixinha.conteúdo = bigJava;
-		} else {
-			System.out.println("Opa, livro excedeu alguma dimensão da caixa!");
-		}				
+	
+
+		//adicionarLivroNaCaixa(miniBíblia, caixinha);
+		caixinha.adicionarLivro(miniBíblia);
 		System.out.println("O conteúdo da caixinha é: " + caixinha.conteúdo);
-		
-		
-		
 	}
 
 }
