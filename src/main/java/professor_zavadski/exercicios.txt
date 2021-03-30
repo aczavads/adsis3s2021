@@ -1,0 +1,16 @@
+Nome dos pacotes: usar exercicio_<<numero>:
+
+exercicio_1: Criar uma classe AppEscritaConsole que imprima no console 250 mensagens "Olá gente!";
+
+exercicio_2: Criar uma classe AppParOuImpar que imprima no console os números de 1 a 100    (inclusive) determinando se o número é par ou se é ímpar, no seguinte formato:
+1 ==> ímpar
+2 ==> par 
+3 ==> ímpar
+...
+100 => par
+
+exercicio_3: Criar uma classe AppMaiorOuMenor que processe um array com 3 de pessoas que possuam   nome e idade, exibindo no console o nome da pessoa e a indicação de "maior de idade" ou "menor de idade" de acordo com a idade (deve ter pelo menos uma pessoa maior e uma menor).
+
+exercicio_4: Com base no exercicio_3, impedir que uma Pessoa seja criada e/ou modificada com nome inválido (deve ter pelo menos 2 palavras) ou com idade inválida (deve ser maior que zero). 
+
+exercício_5: Com base no exercício 2, imprima todos os números de 50 a 150 que sejam divisíveis por 3 e por 5.
