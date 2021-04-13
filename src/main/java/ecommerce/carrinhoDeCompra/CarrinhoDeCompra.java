@@ -26,8 +26,8 @@ public class CarrinhoDeCompra {
 	}
 	public double getTotal() {
 		double total = 0.00;
-		for (Produto p : itens) {
-			total += p.getPreçoDeVenda();
+		for (int i = 0; i < itens.size(); i++) {
+			total = total + itens.get(i).getPreçoDeVenda().getValor();
 		}
 		return total;
 	}

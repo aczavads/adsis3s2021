@@ -1,12 +1,13 @@
 package ecommerce.produto;
 
 import ecommerce.valueObjects.Nome;
+import ecommerce.valueObjects.PreçoDeVenda;
 
 public class Produto {
 	private Nome nome;
-	private double preçoDeVenda;
+	private PreçoDeVenda preçoDeVenda;
 	
-	public Produto(Nome nome, double preçoDeVenda) {
+	public Produto(Nome nome, PreçoDeVenda preçoDeVenda) {
 		setNome(nome);
 		setPreçoDeVenda(preçoDeVenda);
 	}
@@ -15,7 +16,7 @@ public class Produto {
 		return nome;
 	}
 	
-	public double getPreçoDeVenda() {
+	public PreçoDeVenda getPreçoDeVenda() {
 		return preçoDeVenda;
 	}
 	
@@ -23,9 +24,7 @@ public class Produto {
 		this.nome = novoNome;
 	}
 	
-	public void setPreçoDeVenda(double novoPreçoDeVenda) {
+	public void setPreçoDeVenda(PreçoDeVenda novoPreçoDeVenda) {
 		this.preçoDeVenda = novoPreçoDeVenda;
 	}
-	
-
 }
