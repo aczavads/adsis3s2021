@@ -9,14 +9,15 @@ import ecommerce.cliente.Cliente;
 import ecommerce.produto.Produto;
 import ecommerce.valueObjects.CPF;
 import ecommerce.valueObjects.Nome;
+import ecommerce.valueObjects.PreçoDeVenda;
 
 public class TestesDoEcommerce {
 
 	@Test 
 	public void testarTotalDoCarrinhoDeCompra() {
 		Cliente ana = new Cliente(new Nome("Ana Luíza Marques"), new CPF("787.718.980-00"));
-		Produto omo = new Produto(new Nome("Omo Progress"), 22.75);
-		Produto ovos = new Produto(new Nome("Ovos 30 unidades"), 15.25);
+		Produto omo = new Produto(new Nome("Omo Progress"), new PreçoDeVenda(22.75));
+		Produto ovos = new Produto(new Nome("Ovos 30 unidades"), new PreçoDeVenda(15.25));
 		
 		CarrinhoDeCompra carrinho01 = new CarrinhoDeCompra(ana);
 		carrinho01.adicionarItem(omo);
@@ -39,9 +40,9 @@ public class TestesDoEcommerce {
 	
 	@Test
 	public void testarProduto() {
-		Produto novo = new Produto(new Nome("Omo Progress"), 22.75);
+		Produto novo = new Produto(new Nome("Omo Progress"), new PreçoDeVenda(22.75));
 		
-		assertEquals(22.75, novo.getPreçoDeVenda(), 0.00);
+		assertEquals(22.75, novo.getPreçoDeVenda().getValor(), 0.00);
 		
 		assertEquals("Omo Progress", novo.getNome().getValor());
 	}
