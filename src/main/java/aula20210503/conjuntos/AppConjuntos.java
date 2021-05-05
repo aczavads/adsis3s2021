@@ -26,9 +26,17 @@ public class AppConjuntos {
 		conjuntoDeInteiros.add(50);
 		conjuntoDeInteiros.add(50);
 		conjuntoDeInteiros.add(2);
+
+		Set<String> conjuntoDeNomes= new HashSet<>();
+		conjuntoDeNomes.add("Maria");
+		conjuntoDeNomes.add("Maria");
+		conjuntoDeNomes.add("Maria");
+		conjuntoDeNomes.add("Maria");
+		conjuntoDeNomes.add("Maria");
 		
 		listarColeção(">>> List", listaDeInteiros);
 		listarColeção(">>> Set", conjuntoDeInteiros);
+		listarColeção(">>> Set de Nomes", conjuntoDeNomes);
 	}
 	
 	public static void listarColeção(String mensagem, Collection<? extends Object> coleção) {
