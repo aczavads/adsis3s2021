@@ -25,9 +25,7 @@ public class AppHierarquias {
 				Revista aux = (Revista) p;
 				System.out.println(aux.getTítulo() + " edição=" + aux.getNúmero());
 			}
-		}
-		
-		
+		}	
 	}
 
 }
