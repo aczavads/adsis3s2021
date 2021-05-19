@@ -27,8 +27,12 @@ public class CorRepositoryPersistent implements CorRepository {
 	
 	private void abrirConexão() {
 		try {
-			conexão = DriverManager.getConnection("jdbc:h2:~/adsis3s2021","sa","");
-			conexão.close();
+			try {
+				conexão = DriverManager.getConnection("jdbc:h2:~/adsis3s2021","sa","");
+				conexão.close();
+			} catch (Exception e) {
+				System.out.println("Opa, acho que o banco já estava criado...");
+			}
 			conexão = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/adsis3s2021","sa","");			
 			//conexão = DriverManager.getConnection("jdbc:postgresql://localhost:5432/adsis3s2021","sa","");
 			//conexão = DriverManager.getConnection("jdbc:oracle://localhost:1521/adsis3s2021","sa","");
