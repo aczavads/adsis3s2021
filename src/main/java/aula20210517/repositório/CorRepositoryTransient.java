@@ -10,6 +10,20 @@ public class CorRepositoryTransient implements CorRepository {
 		cores.add(nova);
 	}
 
+	public void atualizar(Cor nova) {
+		int posiçãoParaRemover = -1;
+		for (int i = 0; i < cores.size(); i++) {
+			if (cores.get(i).getSigla().equals(nova.getSigla())) {
+				posiçãoParaRemover = i;
+			}
+		}
+		if (posiçãoParaRemover != -1) {
+			cores.remove(posiçãoParaRemover);
+			cores.add(nova);
+		}
+	}
+
+	
 	public void excluir(Cor cor) {
 		cores.remove(cor);
 	}

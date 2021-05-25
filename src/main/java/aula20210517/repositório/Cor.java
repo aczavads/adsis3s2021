@@ -16,4 +16,7 @@ public class Cor {
 	public String getSigla() {
 		return sigla;
 	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 }
