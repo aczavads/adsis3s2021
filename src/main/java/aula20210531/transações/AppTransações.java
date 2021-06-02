@@ -39,8 +39,15 @@ public class AppTransações {
 						275,
 						new Date());
 			}
-			JOptionPane.showMessageDialog(null, "Opa, mil inserts realizados, mas ainda sem commit!");
-			conexão.commit();
+			//JOptionPane.showMessageDialog(null, "Opa, mil inserts realizados, mas ainda sem commit!");
+			int opção = JOptionPane.showConfirmDialog(null, "Deseja confirmar a transação?","Confirme",JOptionPane.YES_NO_OPTION);
+			if (opção == JOptionPane.YES_OPTION) {
+				conexão.commit();				
+				System.out.println("Commit efetuado!");
+			} else if (opção == JOptionPane.NO_OPTION) {
+				conexão.rollback();
+				System.out.println("Rollback efetuado!");
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
