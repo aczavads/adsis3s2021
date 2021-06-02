@@ -6,12 +6,16 @@ import java.sql.PreparedStatement;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.swing.JOptionPane;
+
 public class AppTransações {
 	
 	public static void main(String[] args) {
-		
 		try {
-			Connection conexão = DriverManager.getConnection("jdbc:h2:~/transações2", "sa", "");
+//			Connection conexão = DriverManager.getConnection("jdbc:h2:~/transações2", "sa", "");
+//			conexão.close();
+			Connection conexão = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/transações2", "sa", "");
+			conexão.setAutoCommit(false);
 			
 			PreparedStatement psCreate = conexão.prepareStatement("create table if not exists livro ("
 					+ "id char(36) primary key,"
@@ -22,16 +26,21 @@ public class AppTransações {
 					+ "publicado_em date not null"
 					+ ")");
 			psCreate.execute();
-			psCreate.close();
+			psCreate.close();			
+			conexão.commit();
 			
-			inserirUmLivro( 
-					conexão,
-					UUID.randomUUID().toString(),
-					"Java Como Programar",
-					true,
-					125.77,
-					275,
-					new Date());
+			for (int i = 0; i < 1000; i++) {
+				inserirUmLivro( 
+						conexão,
+						UUID.randomUUID().toString(),
+						"Java Como Programar: " + System.nanoTime(),
+						true,
+						125.77,
+						275,
+						new Date());
+			}
+			JOptionPane.showMessageDialog(null, "Opa, mil inserts realizados, mas ainda sem commit!");
+			conexão.commit();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,9 +61,9 @@ public class AppTransações {
 		
 		try {
 			PreparedStatement psInsert = conexão.prepareStatement("insert into livro "
-					+ "(id, titulo, ainda_publicado, preco, numero_de_paginas, publicado_em) "
-					+ "values "
-					+ "( ?,      ?,              ?,     ?,                 ?,           ?)");
+					+ " (id, titulo, ainda_publicado, preco, numero_de_paginas, publicado_em) "
+					+ " values "
+					+ " ( ?,      ?,              ?,     ?,                 ?,           ?)");
 			psInsert.setString(1, id);
 			psInsert.setString(2, título);
 			psInsert.setBoolean(3, aindaPublicado);
