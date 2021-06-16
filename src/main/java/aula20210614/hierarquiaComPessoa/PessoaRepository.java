@@ -45,6 +45,7 @@ public class PessoaRepository {
 	}
 	
 	public Pessoa recuperarPeloId(long id) throws Exception {
+		conexão.rollback();
 		Pessoa recuperada = null;
 		try {
 			PreparedStatement psSelectPessoa = conexão.prepareStatement("select id, nome, tipo_pessoa from pessoa where id = ?");
@@ -82,6 +83,7 @@ public class PessoaRepository {
 	}
 
 	public void excluirPeloId(long id) throws Exception {
+		conexão.rollback();
 		try {			
 			PreparedStatement psDeletePessoa = conexão.prepareStatement("delete from pessoa where id = ?");
 			PreparedStatement psDeleteFísica = conexão.prepareStatement("delete from pessoafisica where id = ?");
@@ -90,9 +92,13 @@ public class PessoaRepository {
 			psDeletePessoa.setLong(1, id);
 			psDeleteFísica.setLong(1, id);
 			psDeleteJurídica.setLong(1, id);
-			
-			psDeleteJurídica.execute();
-			psDeleteFísica.execute();
+
+			Pessoa recuperada = recuperarPeloId(id);
+			if (recuperada instanceof PessoaFísica) {
+				psDeleteFísica.execute();
+			} else if (recuperada instanceof PessoaJurídica) {
+				psDeleteJurídica.execute();				
+			}
 			psDeletePessoa.execute();
 			
 			psDeleteFísica.close();
