@@ -3,6 +3,7 @@ package aula20210614.hierarquiaComPessoa;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class PessoaRepository {
 	private Connection conexão;
@@ -41,6 +42,67 @@ public class PessoaRepository {
 		conexão.createStatement().execute(sqlCreateFisica);
 		conexão.createStatement().execute(sqlCreateJurísica);
 		conexão.commit();
+	}
+	
+	public Pessoa recuperarPeloId(long id) throws Exception {
+		Pessoa recuperada = null;
+		try {
+			PreparedStatement psSelectPessoa = conexão.prepareStatement("select id, nome, tipo_pessoa from pessoa where id = ?");
+			PreparedStatement psSelectFísica = conexão.prepareStatement("select id, cpf from pessoafisica where id = ?");
+			PreparedStatement psSelectJurídica = conexão.prepareStatement("select id, cnpj from pessoajuridica where id = ?");
+			
+			psSelectPessoa.setLong(1, id);
+			ResultSet rsPessoa = psSelectPessoa.executeQuery();
+			if (rsPessoa.next()) {
+				String nome = rsPessoa.getString("nome");
+				String tipoPessoa = rsPessoa.getString("tipo_pessoa");
+				if (tipoPessoa.equals("FISICA")) {
+					psSelectFísica.setLong(1, id);
+					ResultSet rsFísica = psSelectFísica.executeQuery();
+					if (rsFísica.next()) {
+						recuperada = new PessoaFísica(id, nome, new CPF(rsFísica.getString("cpf")));
+						return recuperada;
+					}
+				} else if (tipoPessoa.equals("JURIDICA")) {
+					psSelectJurídica.setLong(1, id);
+					ResultSet rsJurídica = psSelectJurídica.executeQuery();
+					if (rsJurídica.next()) {
+						recuperada = new PessoaJurídica(id, nome, new CNPJ(rsJurídica.getString("cnpj")));
+						return recuperada;
+					}
+				}
+			} else {
+				throw new RuntimeException("Pessoa não encontrada!");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return recuperada;
+	}
+
+	public void excluirPeloId(long id) throws Exception {
+		try {			
+			PreparedStatement psDeletePessoa = conexão.prepareStatement("delete from pessoa where id = ?");
+			PreparedStatement psDeleteFísica = conexão.prepareStatement("delete from pessoafisica where id = ?");
+			PreparedStatement psDeleteJurídica = conexão.prepareStatement("delete from pessoajuridica where id = ?");
+			
+			psDeletePessoa.setLong(1, id);
+			psDeleteFísica.setLong(1, id);
+			psDeleteJurídica.setLong(1, id);
+			
+			psDeleteJurídica.execute();
+			psDeleteFísica.execute();
+			psDeletePessoa.execute();
+			
+			psDeleteFísica.close();
+			psDeleteJurídica.close();
+			psDeletePessoa.close();			
+			conexão.commit();
+		} catch (Exception e) {
+			conexão.rollback();
+			e.printStackTrace();
+		}
 	}
 	
 	public void incluir(Pessoa pessoa) throws Exception {
