@@ -19,6 +19,8 @@ public class AppPessoa {
 			repo.incluir(joaquim);
 			repo.incluir(ibm);
 			
+			
+			
 			JOptionPane.showConfirmDialog(null, "Opa, incluídos!");			
 			Pessoa recuperadaPeloId = repo.recuperarPeloId(21);
 			System.out.println("Pessoa recuperada pelo id: " 
